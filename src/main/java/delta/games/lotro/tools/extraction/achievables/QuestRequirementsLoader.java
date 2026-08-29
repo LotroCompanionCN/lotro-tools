@@ -247,16 +247,15 @@ DefaultPermissionBlobStruct:
 
   private QuestRequirement loadQuestRequirement(PropertiesSet questRequirementProps)
   {
-    Integer operatorCodeObj=(Integer)questRequirementProps.getProperty("Usage_Operator");
-    Integer questIdObj=(Integer)questRequirementProps.getProperty("Usage_QuestID");
-    Integer questStatusCodeObj=(Integer)questRequirementProps.getProperty("Usage_QuestStatus");
-    if ((operatorCodeObj==null) || (questIdObj==null) || (questStatusCodeObj==null))
+    int operatorCode=((Integer)questRequirementProps.getProperty("Usage_Operator")).intValue();
+    int questId=((Integer)questRequirementProps.getProperty("Usage_QuestID")).intValue();
+    Integer questStatusInt=(Integer)questRequirementProps.getProperty("Usage_QuestStatus");
+    if (questStatusInt==null)
     {
+      LOGGER.warn("Missing quest status value!");
       return null;
     }
-    int operatorCode=operatorCodeObj.intValue();
-    int questId=questIdObj.intValue();
-    int questStatusCode=questStatusCodeObj.intValue();
+    int questStatusCode=questStatusInt.intValue();
     ComparisonOperator operator=OperatorUtils.getComparisonOperatorFromCode(operatorCode);
     if (operator==null)
     {

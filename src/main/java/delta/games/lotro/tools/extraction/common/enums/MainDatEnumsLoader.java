@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import delta.common.utils.i18n.MultilocalesTranslator;
 import delta.games.lotro.character.gear.GearSlot;
 import delta.games.lotro.common.CharacterSex;
+import delta.games.lotro.common.Size;
 import delta.games.lotro.common.enums.AICooldownChannel;
 import delta.games.lotro.common.enums.AIHint;
 import delta.games.lotro.common.enums.AgentClass;
@@ -23,6 +24,7 @@ import delta.games.lotro.common.enums.CraftTier;
 import delta.games.lotro.common.enums.CraftingUICategory;
 import delta.games.lotro.common.enums.DamageQualifier;
 import delta.games.lotro.common.enums.DeedCategory;
+import delta.games.lotro.common.enums.DeedUIFilter;
 import delta.games.lotro.common.enums.Difficulty;
 import delta.games.lotro.common.enums.EffectAuraType;
 import delta.games.lotro.common.enums.EquipmentCategory;
@@ -200,6 +202,7 @@ public class MainDatEnumsLoader
     loadEnum(587202856,"EffectAuraType",EffectAuraType.class); // 0x23000128
     loadEnum(587203159,"HouseType",HouseType.class); // 0x23000257
     loadEnum(587203173,"HousingHookID",HousingHookID.class); // 0x23000265
+    loadEnum(587202826,"AccomplishmentUIFilter",DeedUIFilter.class); // 0x2300010A
 
     // Derivated enums
     // From EquipmentCategory:
@@ -255,6 +258,7 @@ public class MainDatEnumsLoader
     buildDeedTypeEnum();
     buildBindingEnum();
     buildEquipmentSlotEnum();
+    buildSizeEnum();
     saveEnumsDirectory();
   }
 
@@ -470,6 +474,7 @@ public class MainDatEnumsLoader
     if (code==20) return "N"; // Necklace
     if (code==22) return "P"; // Primary
     if (code==23) return "V"; // Vital
+    if (code==24) return "n"; // Necklace of War
     return null;
   }
 
@@ -549,6 +554,21 @@ public class MainDatEnumsLoader
     handleCustomEntry(lotroEnum,i18n,24,enumName+".CLASS_SLOT","CLASS_SLOT");
     handleCustomEntry(lotroEnum,i18n,25,enumName+".BRIDLE","BRIDLE");
     handleCustomEntry(lotroEnum,i18n,26,enumName+".AURA","AURA");
+
+    saveEnumFile(lotroEnum,implClass,i18n);
+  }
+
+  private void buildSizeEnum()
+  {
+    Class<Size> implClass=Size.class;
+    String enumName="Size";
+    LotroEnum<Size> lotroEnum=new LotroEnum<Size>(5,enumName,implClass);
+    String labelsSetName=ENUM_PREFIX+implClass.getSimpleName();
+    I18nUtils i18n=new I18nUtils(labelsSetName,_facade.getGlobalStringsManager());
+    handleCustomEntry(lotroEnum,i18n,100,enumName+".SOLO","SOLO");
+    handleCustomEntry(lotroEnum,i18n,101,enumName+".SMALL_FELLOWSHIP","SMALL_FELLOWSHIP");
+    handleCustomEntry(lotroEnum,i18n,102,enumName+".FELLOWSHIP","FELLOWSHIP");
+    handleCustomEntry(lotroEnum,i18n,103,enumName+".RAID","RAID");
 
     saveEnumFile(lotroEnum,implClass,i18n);
   }

@@ -93,7 +93,8 @@ public class SocketablesManager
         (socketTypeCode==19) || // Cloak essences
         (socketTypeCode==20) || // Necklace essences
         (socketTypeCode==22) || // Primary Essence
-        (socketTypeCode==23)) // Vital Essence
+        (socketTypeCode==23) || // Vital Essence
+        (socketTypeCode==24)) // Necklace of War (PvP)
     {
       return socketType;
     }
@@ -264,6 +265,7 @@ public class SocketablesManager
     if (code==14) return WellKnownCharacterClassKeys.MINSTREL;
     if (code==15) return WellKnownCharacterClassKeys.RUNE_KEEPER;
     if (code==16) return WellKnownCharacterClassKeys.WARDEN;
+    if (code==21) return WellKnownCharacterClassKeys.CORSAIR;
     return null;
   }
 
